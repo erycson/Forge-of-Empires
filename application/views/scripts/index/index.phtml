@@ -1,0 +1,327 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title>Forge of Empires</title>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+        <meta name="description" content="Forge of Empires – Um jogo gratuito online." />
+
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <style type="text/css" media="screen">
+            body { margin:0; padding:0; text-align:center; color: #ffffff; background: #0e1e2c; }
+
+            #container { margin:20px auto; width:770px; text-align:left;}
+
+            #closePopup {
+                position: absolute;
+                background-image: url('/images/button_close.png');
+                width: 19px;
+                height: 19px;
+                top: 50%;
+                margin-top: -285px;
+                left: 50%;
+                margin-left: 360px;
+            }
+
+            #closeForumPopup {
+                position: absolute;
+                background-image: url('/images/button_close.png');
+                background-position: 0 0;
+                width: 19px;
+                height: 19px;
+                top: 50%;
+                left: 50%;
+                margin-top: -264px;
+                margin-left: 375px;
+                cursor: pointer;
+            }
+
+            #closeForumPopup:hover {
+                background-position: 0 100%;
+            }
+
+            #getFlashPlayerText {
+                position: relative;
+                bottom: 317px;
+                left: 304px;
+                width: 300px;
+                height: 113px;
+                color: #ffce6c;
+                text-align: center;
+                font-family: Arial;
+            }
+
+            div.return {
+                position: relative;
+                background-image:url('/images/bg_return.png');
+                display:inline-block;
+                overflow:hidden;
+                width:338px;
+                height:73px;
+            }
+
+            div.button {
+                background: url('/images/bt_return.png') no-repeat 0 0;
+                color:#f4dac2;
+                margin: 14px 0 0 74px;
+                padding: 4px;
+                float: left;
+                width: 250px;
+                height: 36px;
+            }
+
+            div.button a {
+                color: inherit;
+                text-align:center;
+                font-family:"Arial", sans-serif;
+                font-size:17px;
+                line-height:95%;
+                font-weight:bold;
+                text-decoration:none;
+                width:100%;
+                height:100%;
+                cursor: pointer;
+            }
+
+            div.button:hover {
+                background-position: 0 -44px;
+                color:#fdf9f4;
+            }
+
+            div.button:active {
+                background-position: 0 -88px;
+                color:#d4b192;
+            }
+        </style>
+
+        <script type="text/javascript" src="/cache/merged_game.js?1348567731"></script>
+        <script type="text/javascript">
+            var gameInfo = {};
+
+            function exposeGameInfo(flashVersion, gameVersion) {
+                gameInfo.flashVersion = flashVersion;
+                gameInfo.gameVersion = gameVersion;
+            }
+
+            function getViewportSize() {
+                var size = [0, 0];
+                if (typeof window.innerWidth != "undefined") {
+                    size = [window.innerWidth, window.innerHeight];
+                }
+                else if (typeof document.documentElement != "undefined" && typeof document.documentElement.clientWidth != "undefined" && document.documentElement.clientWidth != 0) {
+                    size = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+                }
+                else {
+                    size = [document.getElementsByTagName("body")[0].clientWidth, document.getElementsByTagName("body")[0].clientHeight];
+                }
+                return size;
+            }
+			
+            function getIP() {
+                return "186.214.130.86";
+            }
+			
+            function getBrowser() {
+                var userAgent = navigator.userAgent;				
+                var isFirefox = userAgent.search(/Firefox/) != -1;
+                var isIE = userAgent.search(/MSIE/) != -1;
+                var isOpera = userAgent.search(/Opera/) != -1;
+                var isChrome = userAgent.search(/Chrome/) != -1;
+                var isSafari = userAgent.search(/Safari/) != -1 ;
+							
+                var result = "";
+                var version = 0.0;
+                if (isIE) {
+                    result = userAgent.match(/MSIE [0-9\.]*/)[0];
+                } else if (isFirefox) {
+                    result = userAgent.match(/Firefox\/[0-9\.]*/)[0];
+                } else if (isOpera) {
+                    result = "Opera " + userAgent.match(/Version\/[0-9\.]*/)[0];
+                } else if (isChrome) {
+                    result = userAgent.match(/Chrome\/[0-9\.]*/)[0];
+                } else if (isSafari) {
+                    result = "Safari " + userAgent.match(/Version\/[0-9\.]*/)[0];
+                }
+				
+                return result;
+            }
+
+            function createFullBrowserFlash() {
+                swfobject.createCSS("html", "height:100%;");
+                swfobject.createCSS("body", "height:100%;");
+                swfobject.createCSS("#container", "margin:0; width:100%; height:100%; min-width:950px; min-height:550px;");
+                createOnResize();
+                window.onresize();
+            }
+
+            function createOnResize() {
+                window.onresize = function() {
+                    var el = document.getElementById("content");
+                    var ic = document.getElementById("imageContent");
+                    var size = getViewportSize();
+                    el.style.width = ic.style.width = size[0] < 950 ? "950px" : "100%";
+                    el.style.height = ic.style.height = size[1] < 550 ? "550px" : "100%";
+                };
+            }
+
+            function removeOnResize() {
+                window.onresize = null;
+                delete window.onresize;
+            }
+
+            function showPayment() {
+                showIframe('https://pay.innogames.de/payment-window?player_id=97159&game=foe&market=pt&hash=6e573879');
+            }
+
+            function showForum() {
+                showForumIframe('/game/forum');
+            }
+
+            function showIframe(url) {
+                $('#content').css('top', '-10000px');
+                $('#imageContent').css('top', '');
+                $('<iframe id="payment"  allowtransparency="true" scrolling="no" frameBorder="0" style="position: absolute; display: block; height: 560px !important; top: 50%; margin-top: -280px; width: 790px !important; left: 50%; margin-left: -395px;border:none;">').appendTo('#imageContent');
+                $('<div id="closePopup" onClick="hideIframe()"></div>').appendTo('#imageContent');
+                $('#payment').attr('src', url);
+                $('<div style="position:absolute;top:50%;margin-top:300px;width:100%;text-align:center;" id="abort">' +
+                    '<div class="return">'+
+                    '<div class="button" onClick="hideIframe()"><a href="#" onClick="return hideIframe()" style="">' +
+                    'Voltar a<br/ >Forge of Empires</a></div></div></div>').appendTo('#container');
+
+                removeOnResize();
+            }
+
+            function showForumIframe(url) {
+                $('#content').css('top', '-10000px');
+                $('#imageContent').css('top', '');
+                $('<iframe id="foe_clan_forum" class="foe_ingame_iframe"  allowtransparency="true" scrolling="no" frameBorder="0" style="position: absolute; display: block; height: 563px !important; top: 50%; margin-top: -281px; width: 825px !important; left: 50%; margin-left: -412px; border:none;">').appendTo('#imageContent');
+                $('<div id="closeForumPopup" onClick="hideForumIframe()"></div>').appendTo('#imageContent');
+                $('#foe_clan_forum').attr('src', url);
+                $('<div style="position:absolute;top:50%;margin-top:300px;width:100%;text-align:center;" id="abort">' +
+                    '<div class="return">'+
+                    '<div class="button" onClick="hideIframe()"><a href="#" onClick="return hideForumIframe()" style="">' +
+                    'Voltar a<br/ >Forge of Empires</a></div></div></div>').appendTo('#container');
+
+                removeOnResize();
+            }
+
+            function setScreenshot(screenshotData) {
+                $('#screenshotObject').attr('src' , 'data:image/jpeg;base64,' + screenshotData);
+            }
+
+            var transactionFinished = false;
+
+            function hideIframe() {
+                $('#content').css('top', '');
+                $('#imageContent').css('top', '-10000px');
+                $('#payment, #abort, #closePopup').remove();
+                $('#container').attr('onClick', null);
+
+                createOnResize();
+
+                var obj = swfobject.getObjectById("content");
+                obj.dataReceiver();
+
+                return false;
+            }
+
+            function hideForumIframe() {
+                $('#content').css('top', '');
+                $('#imageContent').css('top', '-10000px');
+                $('#foe_clan_forum, #abort, #closeForumPopup').remove();
+                $('#container').attr('onClick', null);
+
+                createOnResize();
+
+                var obj = swfobject.getObjectById("content");
+                obj.dataReceiver();
+
+                return false;
+            }
+
+            var swfVersionStr = "11.2";
+            var xiSwfUrlStr = "/client/expressInstall.swf";
+            var flashvars = {
+                'string_basepath' : 'http://cdn.foe.local/',
+                'string_swfpath' : 'swf/',
+                'string_gatewayUrl' : 'http://foe.local/game/amf',
+                'string_market_id' : 'pt',
+                'boolean_sound' : 'false',
+                'string_urlSuffix' : '1348560538',
+                'locale' : 'pt_PT',
+                'localeMtime': '1348567615',
+                'string_world_id' : 'pt2',
+            };
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#45170f";
+            params.allowscriptaccess = "always";
+            params.allowFullScreen = "true";
+            params.allowFullScreenInteractive = "true";
+            params.wmode = "direct";
+            var attributes = {};
+            attributes.name = "fp_content";
+            attributes.align = "middle";
+            // swffit.fit('content', 950, 500);
+            swfobject.embedSWF("http://cdn.foe.local/swf/Preloader.swf?1348560538", "content", "100%", "100%", swfVersionStr, xiSwfUrlStr,
+            flashvars, params, attributes);
+            if (swfobject.hasFlashPlayerVersion(swfVersionStr)) {
+                swfobject.addDomLoadEvent(createFullBrowserFlash);
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="container" src="blank.gif" style="margin: 0 auto; display:block;">
+            <div id="content" style="position: absolute; padding-top: 30px;">
+                <img src="/images/start/no_flash_main.png" alt=""/>
+
+                <div id="getFlashPlayerText">
+                    <p style="font-size: 18px; font-weight: bold;">Bem-vindo ao Forge of Empires!</p>
+                    <p style="font-size: 16px;">Para visualizar esta página assegura-te que o Adobe Flash Player está instalado na versão 11.2 ou superior.</p>
+                </div>
+
+                <div id="getFlashPlayerImageWrapper" style="position: relative; top: -300px; left: 375px;">
+                    <a href="http://get.adobe.com/flashplayer/" target="_blank">
+                        <img id="getFlashPlayerImage" border="0" alt="Get Adobe Flash player" />
+                    </a>
+                </div>
+            </div>
+
+            <div id="imageContent" style="position:absolute; top: -10000px;">
+                <img id="screenshotObject" style="margin: 0 auto; width: 100%; height: 100%; display:block;" alt=""/>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'MO-28056232-1']);
+            _gaq.push(['_setDomainName', '.forgeofempires.com']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>							</body>
+</html>
+
+<script type="text/javascript">
+
+    var getFlashPlayerImageUrl = function() {
+        var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+        return pageHost + "www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg";
+    };
+
+    $(function() {
+        $('#getFlashPlayerImage').attr('src', getFlashPlayerImageUrl());
+    });
+
+</script>
