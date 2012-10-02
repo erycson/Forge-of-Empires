@@ -1,0 +1,5 @@
+<cross-domain-policy>
+	<site-control permitted-cross-domain-policies="master-only" />
+	<allow-access-from domain="*.foe.local" />
+	<allow-access-from domain="*.foe.local" />
+</cross-domain-policy>
